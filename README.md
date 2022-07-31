@@ -18,3 +18,8 @@ Aby zrunować program:
 debug filename.exe
 
 Gdy pojawi się myślnik g uruchamia program, natomiast q kończy.
+
+Aby debugować program:
+
+dosbox-debug
+
