@@ -1,10 +1,10 @@
 .386
-.model flat
-.code
+.MODEL flat
+.STACK 4096
+.CODE
 start  PROC
-		mov	eax,2000
-		add eax,4000
-
-		ret
-start	endp
-end		start
+		MOV EAX,2
+		ADD EAX,3
+		RET
+start ENDP
+END start
