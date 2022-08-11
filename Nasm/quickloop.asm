@@ -19,7 +19,7 @@ notzero:
     jz sucess
 
 sucess:
-    sub rbx, 29
+    sub rbx, 30
     xor rax, rax
     ret
     
