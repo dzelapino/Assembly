@@ -3,7 +3,7 @@
 section .data
 iterator dq 0
 endindex dq 0
-array dq 102, 30, 14, 132, 1 , 10
+array dq 102, 30, 14, 132, 1 , 10, 40, 32, 55, 56, 55, 100, 101, 3, 6
 arraylen equ ($ - array) / 8
 ; w quadword adresuje sie co 8
 
@@ -46,11 +46,13 @@ secondwhile:
     mov rcx, 0
     mov qword[iterator], 0
     add qword[endindex], 1
+    sub rdx, 1
     sub rax, qword[endindex]
     jnz while
     jz sucess
     
     
-sucess:        
+sucess:   
+     
     xor rax, rax
     ret
