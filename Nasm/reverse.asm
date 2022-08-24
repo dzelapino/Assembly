@@ -4,8 +4,8 @@ section .data
 array dq 1, 2, 3, 4, 5, 6
 arraylen equ ($ - array) / 8
 truelen equ ($ - array) - 8
-counter dw 0
-maxcounter dw 0
+counter db 0
+maxcounter db 0
 
 section .text
 global CMAIN
@@ -14,7 +14,7 @@ CMAIN:
     mov ax, arraylen
     mov bl, 2
     div bl
-    mov word[maxcounter], ax
+    mov byte[maxcounter], al
     ;result al
     ;remainder ah
     
@@ -23,8 +23,8 @@ CMAIN:
     jmp countercheck
     
 countercheck:
-    mov cx, word[maxcounter]
-    cmp cx, word[counter]   
+    mov ch, byte[maxcounter]
+    cmp ch, byte[counter]   
     jle end 
     jg reverse
     
@@ -35,7 +35,7 @@ reverse:
     mov qword[array + rbx], rcx
     add rax, 8
     sub rbx, 8
-    inc word[counter]
+    inc byte[counter]
     jmp countercheck
     
 end:
