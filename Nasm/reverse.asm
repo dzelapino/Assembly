@@ -4,25 +4,29 @@ section .data
 array dq 1, 2, 3, 4, 5, 6
 arraylen equ ($ - array) / 8
 truelen equ ($ - array) - 8
-; 0 <-> 32
-; 0 8 16 24 32
-; rax 0
-; rbx max
-; rax + 8
-; rbx - 8
-; 0 8 16 24 32 40 -> 8 32 -> 16 24
+counter dw 0
+maxcounter dw 0
+
 section .text
 global CMAIN
 CMAIN:
     mov rbp, rsp; for correct debugging
-    mov rax, arraylen
-    mov rdx, 2
-    idiv rdx
-    mov rdi, rax
+    mov ax, arraylen
+    mov bl, 2
+    div bl
+    mov word[maxcounter], ax
+    ;result al
+    ;remainder ah
     
     mov rax, 0
     mov rbx, truelen 
-    jmp reverse
+    jmp countercheck
+    
+countercheck:
+    mov cx, word[maxcounter]
+    cmp cx, word[counter]   
+    jle end 
+    jg reverse
     
 reverse:
     mov rcx, qword[array + rax]
@@ -31,11 +35,8 @@ reverse:
     mov qword[array + rbx], rcx
     add rax, 8
     sub rbx, 8
-    mov rcx, rax
-    mov rdx, rbx
-    sub rcx, rdx
-    jnz reverse
-    jz end
+    inc word[counter]
+    jmp countercheck
     
 end:
     xor rax, rax
