@@ -1,27 +1,27 @@
 %include "io64.inc"
 section .data
-tofind dq 94
+tofind dw 40
 section .text
 global CMAIN
 CMAIN:
     mov rbp, rsp; for correct debugging
 
-    mov rax, 0
-    mov rbx, 1
-    mov rdx, 1
+    mov eax, 0
+    mov ebx, 1
+    mov edx, 1
     jmp bonifacy
     
 bonifacy:
-    mov rcx, rdx
-    sub rcx, qword[tofind]
+    mov ecx, edx
+    sub ecx, dword[tofind]
     jnz helper
     jz end
     
 helper:
-    mov rcx, rbx
-    add rbx, rax
-    mov rax, rcx
-    inc rdx
+    mov ecx, ebx
+    add ebx, eax
+    mov eax, ecx
+    inc edx
     jmp bonifacy
     
     
